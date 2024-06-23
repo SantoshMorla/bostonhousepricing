@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v0.3
@@ -21,9 +21,9 @@ jobs:
       - name: Build and push Docker image
         run: |
           # Build your Docker image
-          docker build -t gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v1 .
+          docker build -t gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v2 .
           # Push to GCR
-          docker push gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v1
+          docker push gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v2
 
     #  - name: Deploy to Vertex AI
      #   run: |        
