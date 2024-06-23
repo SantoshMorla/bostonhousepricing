@@ -1,28 +1,32 @@
-name: Deploy Model to Vertex AI	
-	on:
-	 # push:
-   # branches:
-   #   - main
-	  workflow_dipatch:
-	jobs:
-	  deploy:
-	    runs-on: ubuntu-latest
-	
-	    steps:
-	      - name: Checkout code
-	        uses: actions/checkout@v4
-	
-	      - name: Build Docker image
-	        run: docker build -t model-image .
-	
-	      - name: Log in to Google Cloud
-	        uses: google-github-actions/setup-gcloud@v0.3
-	        with:
-	          service_account_key: ${{ secrets.GCP_SA_KEY }}
-	          project_id: genuine-quasar-425514-f6
-	        
-	      - name: Deploy to Vertex AI
-	        run: |
-	          gcloud ai endpoints deploy my-model-endpoint \
-	          --image-uri gcr.io/my-gcp-project/model-image:latest \
-            --region us-central1  
+name: Deploy to Vertex AI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GCP credentials
+        uses: google-github-actions/setup-gcloud@v0.3
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: genuine-quasar-425514-f6
+
+      - name: Build and push Docker image
+        run: |
+          # Build your Docker image
+          docker build -t gcr.io/genuine-quasar-425514-f6/your-model-image:latest .
+          # Push to GCR
+          docker push gcr.io/genuine-quasar-425514-f6/your-model-image:latest
+
+      - name: Deploy to Vertex AI
+        run: |
+          gcloud ai endpoints deploy my-model-endpoint \
+            --image-uri gcr.io/genuine-quasar-425514-f6/your-model-image:latest \
+            --region us-central1
