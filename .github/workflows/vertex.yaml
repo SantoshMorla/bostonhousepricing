@@ -21,9 +21,9 @@ jobs:
       - name: Build and push Docker image
         run: |
           # Build your Docker image
-          docker build -t gcr.io/genuine-quasar-425514-f6/your-model-image:latest .
+          docker build -t gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v1 .
           # Push to GCR
-          docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:latest
+          docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:v1
 
     #  - name: Deploy to Vertex AI
      #   run: |        
