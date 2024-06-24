@@ -27,6 +27,7 @@ jobs:
           docker build -t model-img .
           docker images
           docker tag model-img us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/demo-test
+          docker images
           docker push us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/demo-test
     #  - name: Deploy to Vertex AI
      #   run: |        
