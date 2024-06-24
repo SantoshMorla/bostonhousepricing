@@ -24,7 +24,7 @@ jobs:
  
     - name: Build and push Docker image
       env:
-        IMAGE_NAME: gcr.io/genuine-quasar-425514-f6/model-image:v1
+        IMAGE_NAME: gcr.io/genuine-quasar-425514-f6/model-image:v2
       run: |
         docker build -t $IMAGE_NAME:latest .
         docker push $IMAGE_NAME:latest
