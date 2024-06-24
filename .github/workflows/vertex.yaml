@@ -22,6 +22,9 @@ jobs:
         run: |
           # Build your Docker image
           docker build -t model-image:latest .
+          docker images
+          pwd
+          ll
 
       - uses: actions/upload-artifact@v4
         with:
@@ -29,7 +32,7 @@ jobs:
           path: ./
 
       - name: check dir
-        run: pwd & ll
+        run: ll
           
           # Push to GCR
           # docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:latest
