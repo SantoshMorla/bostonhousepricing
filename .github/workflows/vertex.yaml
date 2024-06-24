@@ -20,14 +20,18 @@ jobs:
       env:
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       run: |
-        echo "${GCP_SA_KEY}" | docker login -u _json_key --password-stdin us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/
+        echo "${GCP_SA_KEY}" | docker login -u _json_key --password-stdin 
  
     - name: Build and push Docker image
-      env:
-        IMAGE_NAME: gcr.io/genuine-quasar-425514-f6/model-image
       run: |
-        docker build -t $IMAGE_NAME:latest .
-        docker push $IMAGE_NAME:latest
- 
-    - name: Log out from Docker
-      run: docker logout https://gcr.io
+          # Build your Docker image
+          docker build -t gcr.io/genuine-quasar-425514-f6/model-image:v1 .
+          # Push to GCR
+          docker push gcr.io/genuine-quasar-425514-f6/demo-project/model-image:v1
+    #- name: Deploy to Vertex AI
+     #   run: |        
+      #    gcloud ai endpoints deploy my-model-endpoint \
+       #     --image-uri gcr.io/genuine-quasar-425514-f6/your-model-image:latest \
+        #    --region us-central1
+         #   us-central1-docker.pkg.dev/genuine-quasar-425514-f6/demo-project
+    
