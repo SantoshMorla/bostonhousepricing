@@ -23,14 +23,17 @@ jobs:
           # Build your Docker image
           docker build -t model-image:latest .
           docker images
-          pwd
+          docker tag 353f3cfa6cfb us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/demo-image
+  
           ls
           docker info | grep "Storage Driver"
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: my-artifact
-          path: ./
+      - name: Build and push Docker image
+        env:
+          IMAGE_NAME: demo-image
+        run: |
+          docker build -t $IMAGE_NAME:latest .
+          docker push us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/$IMAGE_NAME:latest
 
       - name: check dir
         run: |
