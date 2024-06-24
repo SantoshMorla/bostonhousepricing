@@ -39,4 +39,4 @@ jobs:
        #     --image-uri gcr.io/genuine-quasar-425514-f6/your-model-image:latest \
         #    --region us-central1
          #   us-central1-docker.pkg.dev/genuine-quasar-425514-f6/demo-project
-Update vertex.yaml · SantoshMorla/bostonhousepricing@3b4c2cf
+# Update vertex.yaml · SantoshMorla/bostonhousepricing@3b4c2cf
