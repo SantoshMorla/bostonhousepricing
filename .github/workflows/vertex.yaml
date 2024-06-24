@@ -25,6 +25,7 @@ jobs:
         run: |
           gcloud auth configure-docker us-docker.pkg.dev
           docker build -t model-img:v1 .
+          docker images
           docker tag model-img us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/demo-test
           docker push us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/demo-test
     #  - name: Deploy to Vertex AI
