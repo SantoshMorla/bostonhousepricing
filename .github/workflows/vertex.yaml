@@ -35,7 +35,7 @@ jobs:
       - name: check dir
         run: |
           ls
-          cd /var/lib/docker/overlay2
+          sudo cd /var/lib/docker/overlay2
           ls
           
           
