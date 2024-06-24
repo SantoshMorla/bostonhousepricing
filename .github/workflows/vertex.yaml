@@ -15,7 +15,7 @@ jobs:
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v0.3
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: ${{ secrets.GCPKEY}}
           project_id: genuine-quasar-425514-f6
 
       - name: Build and push Docker image
