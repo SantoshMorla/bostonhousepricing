@@ -12,10 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up GCP credentials
-        uses: google-github-actions/setup-gcloud@v2
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
           project_id: genuine-quasar-425514-f6
 
       - name: Build and push Docker image
@@ -23,8 +23,9 @@ jobs:
           # Build your Docker image
           docker build -t model-image .
           docker images
-          docker push model-image 
-  
+          docker tag model-image us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/model-img
+          docker images
+          docker push us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/model-img
           #ls
          # docker info | grep "Storage Driver"
 
