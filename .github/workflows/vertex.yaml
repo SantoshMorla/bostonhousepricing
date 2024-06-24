@@ -3,7 +3,7 @@ name: Deploy to Vertex AI
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   deploy:
@@ -21,9 +21,18 @@ jobs:
       - name: Build and push Docker image
         run: |
           # Build your Docker image
-          docker build -t gcr.io/genuine-quasar-425514-f6/your-model-image:latest .
+          docker build -t model-image:latest .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: ./
+
+      - name: check dir
+        run: pwd & ll
+          
           # Push to GCR
-          docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:latest
+          # docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:latest
     #  - name: Deploy to Vertex AI
      #   run: |        
       #    gcloud ai endpoints deploy my-model-endpoint \
