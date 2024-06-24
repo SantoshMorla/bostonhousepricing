@@ -19,8 +19,8 @@ jobs:
     - name: Log in to Google Container Registry
       env:
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-      run: |
-        echo "${GCP_SA_KEY}" | docker login -u _json_key --password-stdin 
+    #  run: |
+     #   echo "${GCP_SA_KEY}" | docker login -u _json_key --password-stdin 
  
     - name: Build and push Docker image
       run: |
