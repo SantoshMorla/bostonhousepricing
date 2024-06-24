@@ -12,18 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up GCP credentials
-        uses: google-github-actions/setup-gcloud@v0.3
+      - name: install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v2
         with:
+          project_id: ${{ secrets.GOOGLE_PROJECT }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-          project_id: genuine-quasar-425514-f6
+          export_default_credentials: true
 
-      - name: Build and push Docker image
+      - name: build and push the docker image
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         run: |
-          # Build your Docker image
-          docker build -t gcr.io/genuine-quasar-425514-f6/your-model-image:latest .
-          # Push to GCR
-          docker push gcr.io/genuine-quasar-425514-f6/demo-project/your-model-image:latest
+          gcloud auth configure-docker us-docker.pkg.dev
+          docker build -t us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/model-image:v1 .
+          docker push us-docker.pkg.dev/$GOOGLE_PROJECT/demo-project/model-image:v1
     #  - name: Deploy to Vertex AI
      #   run: |        
       #    gcloud ai endpoints deploy my-model-endpoint \
