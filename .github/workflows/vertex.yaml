@@ -30,9 +30,10 @@ jobs:
           docker tag model-img us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/demo-test-1
           docker images
           docker push us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project/demo-test-1
-    #  - name: Deploy to Vertex AI
-     #   run: |        
-      #    gcloud ai endpoints deploy my-model-endpoint \
-       #     --image-uri gcr.io/genuine-quasar-425514-f6/your-model-image:latest \
-        #    --region us-central1
-         #   us-central1-docker.pkg.dev/genuine-quasar-425514-f6/demo-project
+          
+      - name: Deploy to Vertex AI
+        run: |        
+          gcloud ai endpoints deploy my-model-endpoint \
+            --image-uri us-docker.pkg.dev/genuine-quasar-425514-f6/model-img:latest \
+            --region us-docker.pkg.dev
+            us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project
