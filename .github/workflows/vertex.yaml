@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: flivo
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
           
       - name: Deploy to Vertex AI
         run: |        
-          gcloud ai endpoints deploy my-model-endpoint \
+          gcloud ai endpoints deploy demo-model \
             --image-uri us-docker.pkg.dev/genuine-quasar-425514-f6/model-img:latest \
             --region us-docker.pkg.dev
             us-docker.pkg.dev/genuine-quasar-425514-f6/demo-project
